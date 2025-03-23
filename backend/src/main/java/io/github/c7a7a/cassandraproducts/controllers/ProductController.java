@@ -1,6 +1,6 @@
 package io.github.c7a7a.cassandraproducts.controllers;
 
-import io.github.c7a7a.cassandraproducts.data.Product;
+import io.github.c7a7a.cassandraproducts.data.ProductDTO;
 import io.github.c7a7a.cassandraproducts.services.ProductService;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,8 +15,8 @@ public class ProductController {
     }
 
     @PostMapping
-    public Product createProduct(@RequestBody Product product) {
-        return productService.createProduct(product);
+    public ProductDTO createProduct(@RequestBody ProductDTO productDTO) {
+        return productService.createProduct(productDTO);
     }
 
     @GetMapping("/{id}")
@@ -30,8 +30,8 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public String updateProduct(@PathVariable String id, @RequestBody Product product) {
-        return productService.updateProduct(id, product);
+    public String updateProduct(@PathVariable String id, @RequestBody ProductDTO productDTO) {
+        return productService.updateProduct(id, productDTO);
     }
 
     @DeleteMapping("/{id}")
