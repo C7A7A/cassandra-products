@@ -1,8 +1,11 @@
 package io.github.c7a7a.cassandraproducts.controllers;
 
+import io.github.c7a7a.cassandraproducts.data.Product;
 import io.github.c7a7a.cassandraproducts.data.ProductDTO;
 import io.github.c7a7a.cassandraproducts.services.ProductService;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/products")
@@ -15,22 +18,22 @@ public class ProductController {
     }
 
     @PostMapping
-    public ProductDTO createProduct(@RequestBody ProductDTO productDTO) {
+    public Product createProduct(@RequestBody ProductDTO productDTO) {
         return productService.createProduct(productDTO);
     }
 
     @GetMapping("/{id}")
-    public String getProduct(@PathVariable String id) {
+    public Product getProduct(@PathVariable String id) {
         return productService.getProduct(id);
     }
 
     @GetMapping
-    public String getProducts() {
+    public List<Product> getProducts() {
         return productService.getProducts();
     }
 
     @PutMapping("/{id}")
-    public String updateProduct(@PathVariable String id, @RequestBody ProductDTO productDTO) {
+    public Product updateProduct(@PathVariable String id, @RequestBody ProductDTO productDTO) {
         return productService.updateProduct(id, productDTO);
     }
 

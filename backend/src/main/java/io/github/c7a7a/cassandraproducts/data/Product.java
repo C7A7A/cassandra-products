@@ -1,6 +1,7 @@
 package io.github.c7a7a.cassandraproducts.data;
 
-import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
+import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
 import org.springframework.data.cassandra.core.mapping.Table;
 
 import java.math.BigDecimal;
@@ -8,12 +9,14 @@ import java.util.UUID;
 
 @Table("products")
 public class Product {
-    @PrimaryKey
+    @PrimaryKeyColumn(name = "id", type = PrimaryKeyType.CLUSTERED)
     private UUID id;
+    @PrimaryKeyColumn(name = "category", type = PrimaryKeyType.PARTITIONED)
+    private Category category;
     private String name;
     private String description;
     private BigDecimal price;
-    private Category category;
+
 
     public Product(String name, String description, BigDecimal price, Category category) {
         this.id = UUID.randomUUID();
