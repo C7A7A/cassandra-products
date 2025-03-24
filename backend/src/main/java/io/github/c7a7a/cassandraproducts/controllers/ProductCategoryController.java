@@ -1,8 +1,10 @@
 package io.github.c7a7a.cassandraproducts.controllers;
 
+import io.github.c7a7a.cassandraproducts.data.ApiResponse;
 import io.github.c7a7a.cassandraproducts.data.Category;
 import io.github.c7a7a.cassandraproducts.data.ProductDTO;
 import io.github.c7a7a.cassandraproducts.services.ProductCategoryService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +23,14 @@ public class ProductCategoryController {
     }
 
     @GetMapping("/{category}")
-    public List<ProductDTO> getProductsByCategory(@PathVariable Category category) {
-        return productCategoryService.getProductsByCategory(category);
+    public ResponseEntity<ApiResponse<List<ProductDTO>>> getProductsByCategory(@PathVariable Category category) {
+        List<ProductDTO> products = productCategoryService.getProductsByCategory(category);
+
+        String message = products.isEmpty()
+                ? "No products available with category " + category
+                : "Products retrieved successfully";
+
+        return ResponseEntity.ok()
+                .body(new ApiResponse<>(message, products));
     }
 }

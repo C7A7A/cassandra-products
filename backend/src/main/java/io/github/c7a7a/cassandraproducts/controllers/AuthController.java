@@ -25,11 +25,11 @@ public class AuthController {
 
     @PostMapping("login")
     public ResponseEntity<String> login() {
-        return ResponseEntity.ok("Login endpoint!");
+        return ResponseEntity.ok("Login successful");
     }
 
     @PostMapping("/logout")
     public ResponseEntity<String> logout() {
-        return ResponseEntity.ok("Logout endpoint!");
+        return ResponseEntity.ok("Logout successful");
     }
 }
