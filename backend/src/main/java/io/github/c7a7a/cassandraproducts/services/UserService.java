@@ -24,7 +24,7 @@ public class UserService implements UserDetailsService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public User register(User user) {
+    public void register(User user) {
         String username = user.getUsername();
         if (userRepository.findByUsername(username) != null) {
             throw new UserAlreadyExistException("User with username " + username + " already exist");
@@ -35,7 +35,7 @@ public class UserService implements UserDetailsService {
         }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 
     @Override

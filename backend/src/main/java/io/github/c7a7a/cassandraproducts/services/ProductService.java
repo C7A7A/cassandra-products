@@ -52,14 +52,13 @@ public class ProductService {
         throw new ResourceNotFoundException("Product with id: " + id + " not found");
     }
 
-    public String deleteProduct(String id) {
+    public void deleteProduct(String id) {
         UUID productId = UUID.fromString(id);
 
         if (productRepository.existsById(productId)) {
             productRepository.deleteById(productId);
-            return id;
+        } else {
+            throw new ResourceNotFoundException("Product with id: " + id + " not found");
         }
-
-        throw new ResourceNotFoundException("Product with id: " + id + " not found");
     }
 }
