@@ -1,6 +1,8 @@
 package io.github.c7a7a.cassandraproducts.data;
 
 import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
+import org.springframework.data.cassandra.core.mapping.Indexed;
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
 import org.springframework.data.cassandra.core.mapping.Table;
 
@@ -9,9 +11,10 @@ import java.util.UUID;
 
 @Table("products")
 public class Product {
-    @PrimaryKeyColumn(name = "id", type = PrimaryKeyType.CLUSTERED)
+    @PrimaryKey
     private UUID id;
-    @PrimaryKeyColumn(name = "category", type = PrimaryKeyType.PARTITIONED)
+    // create secondary index on category. Querying by category will be slower, but there is only 1 table to handle CRUD operations
+    @Indexed
     private Category category;
     private String name;
     private String description;
