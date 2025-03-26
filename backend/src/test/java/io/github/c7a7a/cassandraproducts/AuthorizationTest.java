@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.c7a7a.cassandraproducts.configuration.TestSecurityConfig;
 import io.github.c7a7a.cassandraproducts.controllers.ProductController;
 import io.github.c7a7a.cassandraproducts.data.Category;
-import io.github.c7a7a.cassandraproducts.data.Product;
+import io.github.c7a7a.cassandraproducts.data.ProductDTO;
 import io.github.c7a7a.cassandraproducts.services.ProductService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class AuthorizationTest {
     @Test
     @WithMockUser(username = "admin", roles = "ADMIN")
     void adminCanCreateProduct() throws Exception {
-        Product product = new Product("name", Category.SPORT, "Desc",  new BigDecimal("59.99"));
+        ProductDTO product = new ProductDTO("name", Category.SPORT, "Desc",  new BigDecimal("59.99"));
 
         mockMvc.perform(post("/products")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -46,7 +46,7 @@ public class AuthorizationTest {
     @Test
     @WithMockUser(username = "user", roles = "USER")
     void userCannotCreateProduct() throws Exception {
-        Product product = new Product("name", Category.SPORT, "Desc",  new BigDecimal("59.99"));
+        ProductDTO product = new ProductDTO("name", Category.SPORT, "Desc",  new BigDecimal("59.99"));
 
         mockMvc.perform(post("/products")
                         .contentType(MediaType.APPLICATION_JSON)
