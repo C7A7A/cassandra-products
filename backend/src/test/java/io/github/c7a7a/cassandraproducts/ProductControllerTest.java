@@ -2,10 +2,10 @@ package io.github.c7a7a.cassandraproducts;
 
 import io.github.c7a7a.cassandraproducts.configuration.TestSecurityConfig;
 import io.github.c7a7a.cassandraproducts.controllers.ProductController;
-import io.github.c7a7a.cassandraproducts.data.Category;
 import io.github.c7a7a.cassandraproducts.data.Product;
 import io.github.c7a7a.cassandraproducts.data.ProductDTO;
 import io.github.c7a7a.cassandraproducts.services.ProductService;
+import io.github.c7a7a.cassandraproducts.utils.TestProductEntities;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -16,7 +16,6 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -34,18 +33,8 @@ public class ProductControllerTest {
     @MockitoBean
     private ProductService productService;
     private final ObjectMapper objectMapper = new ObjectMapper();
-    private final Product product = new Product(
-            "Test Product",
-            Category.CLOTHES,
-            "Descr",
-            new BigDecimal("42.00")
-    );
-    private final ProductDTO productDTO = new ProductDTO(
-            "Test Product",
-            Category.CLOTHES,
-            "Descr",
-            new BigDecimal("42.00")
-    );
+    private final Product product = TestProductEntities.defaultProduct();
+    private final ProductDTO productDTO = TestProductEntities.defaultProductDTO();
 
     @Test
     @WithMockUser(username = "admin", roles = "ADMIN")

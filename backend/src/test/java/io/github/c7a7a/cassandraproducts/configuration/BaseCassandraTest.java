@@ -6,7 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @SpringBootTest
-public class BaseTest {
+public class BaseCassandraTest {
 
     @BeforeAll
     static void beforeAll() {
