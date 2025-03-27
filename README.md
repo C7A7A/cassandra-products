@@ -34,12 +34,13 @@ You can launch project fully in Docker or locally (backend locally, Cassandra in
 2. <code> docker run --name cassandra-products -p 9042:9042 -d cassandra:latest </code>
 3. <code> docker exec -it cassandra-products cqlsh </code>
 4. In the CQL shell, create the keyspace </br>
-<code> CREATE KEYSPACE IF NOT EXISTS products
+```
+   CREATE KEYSPACE IF NOT EXISTS products
    WITH replication = {
    'class': 'SimpleStrategy',
    'replication_factor': 1
    };
-</code>
+```
 
 #### Clone and Build Project
 1. <code> git clone git@github.com:C7A7A/cassandra-products.git </code>
